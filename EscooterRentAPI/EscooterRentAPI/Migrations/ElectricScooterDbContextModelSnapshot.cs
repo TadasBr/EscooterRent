@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace EscooterRentAPI.Data.Migrations
+namespace EscooterRentAPI.Migrations
 {
     [DbContext(typeof(ElectricScooterDbContext))]
     partial class ElectricScooterDbContextModelSnapshot : ModelSnapshot
@@ -39,6 +39,10 @@ namespace EscooterRentAPI.Data.Migrations
                     b.Property<int>("MaxSpeed")
                         .HasColumnType("int");
 
+                    b.Property<string>("Model")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("PricePerDay")
                         .HasColumnType("float");
 
@@ -46,8 +50,6 @@ namespace EscooterRentAPI.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("RentPointId");
 
                     b.ToTable("ElectricScooters");
                 });
@@ -60,7 +62,7 @@ namespace EscooterRentAPI.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Adress")
+                    b.Property<string>("Address")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -86,9 +88,6 @@ namespace EscooterRentAPI.Data.Migrations
                     b.Property<int>("EndMinutes")
                         .HasColumnType("int");
 
-                    b.Property<int>("RentPointId")
-                        .HasColumnType("int");
-
                     b.Property<int>("StartHours")
                         .HasColumnType("int");
 
@@ -97,38 +96,7 @@ namespace EscooterRentAPI.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RentPointId");
-
                     b.ToTable("WorkTimes");
-                });
-
-            modelBuilder.Entity("EscooterRentAPI.Models.ElectricScooter", b =>
-                {
-                    b.HasOne("EscooterRentAPI.Models.RentPoint", "RentPoint")
-                        .WithMany("ElectricScooters")
-                        .HasForeignKey("RentPointId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("RentPoint");
-                });
-
-            modelBuilder.Entity("EscooterRentAPI.Models.WorkTime", b =>
-                {
-                    b.HasOne("EscooterRentAPI.Models.RentPoint", "RentPoint")
-                        .WithMany("WorkTime")
-                        .HasForeignKey("RentPointId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("RentPoint");
-                });
-
-            modelBuilder.Entity("EscooterRentAPI.Models.RentPoint", b =>
-                {
-                    b.Navigation("ElectricScooters");
-
-                    b.Navigation("WorkTime");
                 });
 #pragma warning restore 612, 618
         }

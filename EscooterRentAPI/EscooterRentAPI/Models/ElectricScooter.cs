@@ -7,9 +7,7 @@ namespace EscooterRentAPI.Models
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string Adress { get; set; }
-        public WorkTime[] WorkTime { get; set; }
-        public List<ElectricScooter> ElectricScooters { get; set; }
+        public string Address { get; set; }
     }
 
     public class ElectricScooter
@@ -17,12 +15,11 @@ namespace EscooterRentAPI.Models
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Brand { get; set; }
+        public string Model { get; set; }
         public int MaxDistance { get; set; }
         public double PricePerDay { get; set; }
         public int MaxSpeed { get; set; }
         public int RentPointId { get; set; }
-        [ForeignKey(nameof(RentPointId))]
-        public RentPoint RentPoint { get; set; }
     }
 
     public class WorkTime
@@ -34,8 +31,5 @@ namespace EscooterRentAPI.Models
         public int EndHours { get; set; }
         public int EndMinutes { get; set; }
         public DayOfWeek DayOfWeek { get; set; }
-        public int RentPointId { get; set; }
-        [ForeignKey(nameof(RentPointId))]
-        public RentPoint RentPoint { get; set; }
     }
 }

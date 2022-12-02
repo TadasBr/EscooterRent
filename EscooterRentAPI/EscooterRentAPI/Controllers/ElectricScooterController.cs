@@ -3,6 +3,7 @@ using EscooterRentAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 namespace EscooterRentAPI.Controllers
 {
@@ -25,7 +26,6 @@ namespace EscooterRentAPI.Controllers
         {
             var rentPoint = await _context.RentPoints.FindAsync(rentPointId);
             return rentPoint == null ? NotFound() : Ok(rentPoint);
-
         }
 
         [HttpPost, Route("CreateRentPoint")]
