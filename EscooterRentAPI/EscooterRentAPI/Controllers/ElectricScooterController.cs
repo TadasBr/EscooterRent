@@ -35,7 +35,7 @@ namespace EscooterRentAPI.Controllers
             await _context.RentPoints.AddAsync(rentPoint);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetRentPointById), new { id = rentPoint.Id });
+            return CreatedAtAction(nameof(CreateRentPoint), new { id = rentPoint.Id }, rentPoint);
         }
 
         [HttpPut("{rentPointId}")]
@@ -86,7 +86,7 @@ namespace EscooterRentAPI.Controllers
             await _context.ElectricScooters.AddAsync(electricScooter);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetRentPointById), new { id = electricScooter.Id });
+            return CreatedAtAction(nameof(CreateScooter), new { id = electricScooter.Id }, electricScooter);
         }
 
         [HttpPut("{scooterId}")]

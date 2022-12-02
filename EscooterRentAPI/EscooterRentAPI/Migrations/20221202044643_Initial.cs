@@ -19,7 +19,7 @@ namespace EscooterRentAPI.Migrations
                     MaxDistance = table.Column<int>(type: "int", nullable: false),
                     PricePerDay = table.Column<double>(type: "float", nullable: false),
                     MaxSpeed = table.Column<int>(type: "int", nullable: false),
-                    RentPointId = table.Column<int>(type: "int", nullable: false)
+                    RentPointId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -32,7 +32,8 @@ namespace EscooterRentAPI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -49,7 +50,8 @@ namespace EscooterRentAPI.Migrations
                     StartMinutes = table.Column<int>(type: "int", nullable: false),
                     EndHours = table.Column<int>(type: "int", nullable: false),
                     EndMinutes = table.Column<int>(type: "int", nullable: false),
-                    DayOfWeek = table.Column<int>(type: "int", nullable: false)
+                    DayOfWeek = table.Column<int>(type: "int", nullable: false),
+                    RentPointId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
