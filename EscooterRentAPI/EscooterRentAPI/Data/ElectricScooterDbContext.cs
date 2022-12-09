@@ -1,9 +1,11 @@
-﻿using EscooterRentAPI.Models;
+﻿using EscooterRentAPI.Auth.Model;
+using EscooterRentAPI.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace EscooterRentAPI.Data
 {
-    public class ElectricScooterDbContext : DbContext
+    public class ElectricScooterDbContext : IdentityDbContext<RentRestUser>
     {
         public ElectricScooterDbContext(DbContextOptions<ElectricScooterDbContext> options) : base(options)
         {

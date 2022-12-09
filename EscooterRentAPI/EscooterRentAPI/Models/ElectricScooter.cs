@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using EscooterRentAPI.Auth.Model;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EscooterRentAPI.Models
@@ -9,6 +10,9 @@ namespace EscooterRentAPI.Models
         public int Id { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
+        [Required]
+        public string UserId { get; set; }
+        public RentRestUser User { get; set;}
     }
 
     public class ElectricScooter
