@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EscooterRentAPI.Migrations
 {
     [DbContext(typeof(ElectricScooterDbContext))]
-    [Migration("20221208225152_identity")]
-    partial class identity
+    [Migration("20221214191856_Authentication")]
+    partial class Authentication
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -125,6 +125,34 @@ namespace EscooterRentAPI.Migrations
                     b.ToTable("ElectricScooters");
                 });
 
+            modelBuilder.Entity("EscooterRentAPI.Models.ElectricScooterSpecification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("ElectricScooterId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("HasSpeedometer")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("HeightCM")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LengthCM")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WheelSizeCM")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Specifications");
+                });
+
             modelBuilder.Entity("EscooterRentAPI.Models.RentPoint", b =>
                 {
                     b.Property<int>("Id")
@@ -150,37 +178,6 @@ namespace EscooterRentAPI.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("RentPoints");
-                });
-
-            modelBuilder.Entity("EscooterRentAPI.Models.WorkTime", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("DayOfWeek")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EndHours")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EndMinutes")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("RentPointId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StartHours")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StartMinutes")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("WorkTimes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

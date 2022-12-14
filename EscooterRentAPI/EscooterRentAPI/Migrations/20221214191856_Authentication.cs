@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EscooterRentAPI.Migrations
 {
-    public partial class identity : Migration
+    public partial class Authentication : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -68,21 +68,20 @@ namespace EscooterRentAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "WorkTimes",
+                name: "Specifications",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    StartHours = table.Column<int>(type: "int", nullable: false),
-                    StartMinutes = table.Column<int>(type: "int", nullable: false),
-                    EndHours = table.Column<int>(type: "int", nullable: false),
-                    EndMinutes = table.Column<int>(type: "int", nullable: false),
-                    DayOfWeek = table.Column<int>(type: "int", nullable: false),
-                    RentPointId = table.Column<int>(type: "int", nullable: true)
+                    HeightCM = table.Column<int>(type: "int", nullable: false),
+                    LengthCM = table.Column<int>(type: "int", nullable: false),
+                    WheelSizeCM = table.Column<int>(type: "int", nullable: false),
+                    HasSpeedometer = table.Column<bool>(type: "bit", nullable: false),
+                    ElectricScooterId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WorkTimes", x => x.Id);
+                    table.PrimaryKey("PK_Specifications", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -281,7 +280,7 @@ namespace EscooterRentAPI.Migrations
                 name: "RentPoints");
 
             migrationBuilder.DropTable(
-                name: "WorkTimes");
+                name: "Specifications");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

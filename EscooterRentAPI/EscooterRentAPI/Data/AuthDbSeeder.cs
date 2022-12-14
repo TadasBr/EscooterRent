@@ -33,7 +33,7 @@ namespace EscooterRentAPI.Data
 
             if (existingAdminUser == null)
             {
-                var createAdminUserResult = await _userManager.CreateAsync(newAdminUser, password: "VerySafePassword1");
+                var createAdminUserResult = await _userManager.CreateAsync(newAdminUser, password: "VerySafePassword1!");
                 if (createAdminUserResult.Succeeded)
                 {
                     await _userManager.AddToRolesAsync(newAdminUser, RentRoles.All);

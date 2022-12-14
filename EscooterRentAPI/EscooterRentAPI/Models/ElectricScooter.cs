@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EscooterRentAPI.Models
 {
-    public class RentPoint
+    public class RentPoint : IUserOwnedResource
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -27,15 +27,14 @@ namespace EscooterRentAPI.Models
         public int? RentPointId { get; set; }
     }
 
-    public class WorkTime
+    public class ElectricScooterSpecification
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public int StartHours { get; set; }
-        public int StartMinutes { get; set; }
-        public int EndHours { get; set; }
-        public int EndMinutes { get; set; }
-        public DayOfWeek DayOfWeek { get; set; }
-        public int? RentPointId { get; set; }
+        public int HeightCM { get; set; }
+        public int LengthCM { get; set; }
+        public int WheelSizeCM { get; set; }
+        public bool HasSpeedometer { get; set; }
+        public int ElectricScooterId { get; set; }
     }
 }

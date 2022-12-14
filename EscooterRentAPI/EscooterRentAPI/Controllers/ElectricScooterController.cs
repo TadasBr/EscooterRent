@@ -1,9 +1,13 @@
-﻿using EscooterRentAPI.Data;
+﻿using EscooterRentAPI.Auth.Model;
+using EscooterRentAPI.Data;
 using EscooterRentAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace EscooterRentAPI.Controllers
 {
@@ -12,68 +16,19 @@ namespace EscooterRentAPI.Controllers
     public class ElectricScooterController : ControllerBase
     {
         private readonly ElectricScooterDbContext _context;
+        private readonly IAuthorizationService _authorizationService;
 
-        public ElectricScooterController(ElectricScooterDbContext context) => _context = context;
-
-        [HttpGet, Route("RentPoints")]
-        public async Task<IEnumerable<RentPoint>> GetRentPoints() =>
-            await _context.RentPoints.ToListAsync();
-
-        [HttpGet, Route("RentPointsByCount/{count}")]
-        public async Task<IEnumerable<RentPoint>> GetRentPoints(int count) =>
-            await _context.RentPoints.Take(count).ToListAsync();
-
-        [HttpGet, Route("RentPointsById/{rentId}")]
-        [ProducesResponseType(typeof(RentPoint), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetRentPointById(int rentPointId)
+        public ElectricScooterController(ElectricScooterDbContext context, IAuthorizationService service)
         {
-            var rentPoint = await _context.RentPoints.FindAsync(rentPointId);
-            return rentPoint == null ? NotFound() : Ok(rentPoint);
-        }
-
-        [HttpPost, Route("RentPoint")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        public async Task<IActionResult> CreateRentPoint(RentPoint rentPoint)
-        {
-            await _context.RentPoints.AddAsync(rentPoint);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(CreateRentPoint), new { id = rentPoint.Id }, rentPoint);
-        }
-
-        [HttpPut, Route("RentPoints/{rentPointId}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> UpdateRentPoint(int rentPointId, RentPoint rentPoint)
-        {
-            if (rentPointId != rentPoint.Id) return BadRequest();
-
-            _context.Entry(rentPoint).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        [HttpDelete, Route("RentPoints/{rentPointId}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]  
-        public async Task<IActionResult> DeleteRentPoint(int rentPointId)
-        {
-            var rentPointToDelete = await _context.RentPoints.FindAsync(rentPointId);
-            if(rentPointToDelete == null) return NotFound();
-
-            _context.RentPoints.Remove(rentPointToDelete);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            _context = context;
+            _authorizationService = service;
         }
 
         [HttpGet, Route("Scooters")]
         public async Task<IEnumerable<ElectricScooter>> GetScooters() =>
             await _context.ElectricScooters.ToListAsync();
 
-        [HttpGet, Route("Scoooters/{count}")]
+        [HttpGet("{count}")]
         public async Task<IEnumerable<ElectricScooter>> GetScootersByCount(int count) =>
             await _context.ElectricScooters.Take(count).ToListAsync();
 
@@ -92,7 +47,7 @@ namespace EscooterRentAPI.Controllers
             return scooter == null ? NotFound() : Ok(scooter);
         }
 
-        [HttpPost, Route("Scooter")]
+        [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<IActionResult> CreateScooter(ElectricScooter electricScooter)
         {
@@ -102,7 +57,7 @@ namespace EscooterRentAPI.Controllers
             return CreatedAtAction(nameof(CreateScooter), new { id = electricScooter.Id }, electricScooter);
         }
 
-        [HttpPut("Scooters/{scooterId}")]
+        [HttpPut("{scooterId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> UpdateScooter(int scooterId, ElectricScooter scooter)
@@ -115,7 +70,7 @@ namespace EscooterRentAPI.Controllers
             return NoContent();
         }
 
-        [HttpDelete, Route("Scooters/{scooterId}")]
+        [HttpDelete("{scooterId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteScooter(int scooterId)

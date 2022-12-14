@@ -13,7 +13,7 @@ namespace EscooterRentAPI.Data
 
         public DbSet<ElectricScooter> ElectricScooters { get; set; }
         public DbSet<RentPoint> RentPoints { get; set; }
-        public DbSet<WorkTime> WorkTimes { get; set; }
+        public DbSet<ElectricScooterSpecification> Specifications { get; set; }
 
     }
 }
