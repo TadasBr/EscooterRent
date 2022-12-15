@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EscooterRentAPI.Migrations
 {
-    public partial class Authentication : Migration
+    public partial class auth : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -73,10 +73,8 @@ namespace EscooterRentAPI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    HeightCM = table.Column<int>(type: "int", nullable: false),
-                    LengthCM = table.Column<int>(type: "int", nullable: false),
-                    WheelSizeCM = table.Column<int>(type: "int", nullable: false),
-                    HasSpeedometer = table.Column<bool>(type: "bit", nullable: false),
+                    specificationName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ElectricScooterId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

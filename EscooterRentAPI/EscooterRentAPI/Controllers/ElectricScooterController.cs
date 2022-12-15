@@ -1,13 +1,8 @@
-﻿using EscooterRentAPI.Auth.Model;
-using EscooterRentAPI.Data;
-using EscooterRentAPI.Models;
+﻿using EscooterRentAPI.Data;
+using EscooterRentAPI.Models.Entities;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Globalization;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 
 namespace EscooterRentAPI.Controllers
 {

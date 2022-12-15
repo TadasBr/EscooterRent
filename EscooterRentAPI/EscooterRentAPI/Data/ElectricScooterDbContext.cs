@@ -1,5 +1,5 @@
 ﻿using EscooterRentAPI.Auth.Model;
-using EscooterRentAPI.Models;
+using EscooterRentAPI.Models.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,13 +1,8 @@
-﻿using EscooterRentAPI.Auth.Model;
-using EscooterRentAPI.Data;
-using EscooterRentAPI.Models;
+﻿using EscooterRentAPI.Data;
+using EscooterRentAPI.Models.Entities;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Globalization;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 
 namespace EscooterRentAPI.Controllers
 {
@@ -30,14 +25,34 @@ namespace EscooterRentAPI.Controllers
         public async Task<IEnumerable<ElectricScooterSpecification>> GetSpecificationsByCount(int count) =>
             await _context.Specifications.Take(count).ToListAsync();
 
-        [HttpGet, Route("SpecificationsByCount/{specificationId}")]
-        [ProducesResponseType(typeof(RentPoint), StatusCodes.Status200OK)]
+        [HttpGet, Route("SpecificationsById/{specificationId}")]
+        [ProducesResponseType(typeof(ElectricScooterSpecification), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetSpecificationsById(int specificationId)
         {
             var specification = await _context.Specifications.FindAsync(specificationId);
             return specification == null ? NotFound() : Ok(specification);
         }
+
+        [HttpPut("{specificationId}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> UpdateSpecification(int specificationId, ElectricScooterSpecification specification)
+        {
+            if (specificationId != specification.Id) return BadRequest();
+
+            _context.Entry(specification).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+
+        [ProducesResponseType(typeof(ElectricScooterSpecification), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpGet, Route("SpecificationsByScooterId/{scooterId}")]
+        public async Task<IEnumerable<ElectricScooterSpecification>> GetScooterByRentId(int scooterId) =>
+            await _context.Specifications.Where(specification => specification.ElectricScooterId == scooterId).ToListAsync();
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -49,24 +64,17 @@ namespace EscooterRentAPI.Controllers
             return CreatedAtAction(nameof(CreateSpecification), new { id = specification.Id }, specification);
         }
 
-        [HttpPut("{specificationId}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [Authorize(Roles = RentRoles.RentUser)]
-        public async Task<IActionResult> UpdateSpecification(int specificationId, ElectricScooterSpecification specification)
-        {
-            if (specificationId != specification.Id) return BadRequest();
+        //[ProducesResponseType(typeof(ElectricScooterSpecification), StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status404NotFound)]
+        //[HttpGet, Route("ScootersByRentId/{rentId}/SpecificationsByScooterId/{scooterId}")]
+        //public async Task<IEnumerable<ElectricScooterSpecification>> GetSpecificationsByScooterIdByRentId(int scooterId, int rentId) =>
+        //    await _context.Specifications.Where(specification => specification.ElectricScooterId == scooterId).ToListAsync();
 
-            _context.Entry(specification).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
 
         [HttpDelete("{specificationId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> DeleteRentPoint(int specificationId)
+        public async Task<IActionResult> DeleteSpecification(int specificationId)
         {
             var specificationToDelete = await _context.Specifications.FindAsync(specificationId);
             if (specificationToDelete == null) return NotFound();

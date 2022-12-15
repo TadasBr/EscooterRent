@@ -1,11 +1,10 @@
 ﻿using EscooterRentAPI.Auth.Model;
 using EscooterRentAPI.Data;
-using EscooterRentAPI.Models;
+using EscooterRentAPI.Models.Dtos.RentPoint;
+using EscooterRentAPI.Models.Entities;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
@@ -42,15 +41,20 @@ namespace EscooterRentAPI.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        public async Task<IActionResult> CreateRentPoint(RentPoint rentPoint)
+        [Authorize(Roles = RentRoles.RentUser)]
+        public async Task<ActionResult<RentPointDto>> CreateRentPoint(RentPoint rentPoint)
         {
-            rentPoint.UserId = User.FindFirstValue(JwtRegisteredClaimNames.Sub);
+            var newRentPoint = new RentPoint
+            {
+                Address = rentPoint.Address,
+                City = rentPoint.City,
+                UserId = User.FindFirstValue(JwtRegisteredClaimNames.Sub)
+            };
 
-            await _context.RentPoints.AddAsync(rentPoint);
+            await _context.RentPoints.AddAsync(newRentPoint);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(CreateRentPoint), new { id = rentPoint.Id }, rentPoint);
+            return Created("", new RentPointDto(newRentPoint.Address, newRentPoint.City));
         }
 
         [HttpPut("{rentPointId}")]

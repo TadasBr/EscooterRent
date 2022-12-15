@@ -90,7 +90,7 @@ namespace EscooterRentAPI.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("EscooterRentAPI.Models.ElectricScooter", b =>
+            modelBuilder.Entity("EscooterRentAPI.Models.Entities.ElectricScooter", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -123,7 +123,7 @@ namespace EscooterRentAPI.Migrations
                     b.ToTable("ElectricScooters");
                 });
 
-            modelBuilder.Entity("EscooterRentAPI.Models.ElectricScooterSpecification", b =>
+            modelBuilder.Entity("EscooterRentAPI.Models.Entities.ElectricScooterSpecification", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -134,24 +134,20 @@ namespace EscooterRentAPI.Migrations
                     b.Property<int>("ElectricScooterId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("HasSpeedometer")
-                        .HasColumnType("bit");
+                    b.Property<string>("description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("HeightCM")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LengthCM")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WheelSizeCM")
-                        .HasColumnType("int");
+                    b.Property<string>("specificationName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Specifications");
                 });
 
-            modelBuilder.Entity("EscooterRentAPI.Models.RentPoint", b =>
+            modelBuilder.Entity("EscooterRentAPI.Models.Entities.RentPoint", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -311,7 +307,7 @@ namespace EscooterRentAPI.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("EscooterRentAPI.Models.RentPoint", b =>
+            modelBuilder.Entity("EscooterRentAPI.Models.Entities.RentPoint", b =>
                 {
                     b.HasOne("EscooterRentAPI.Auth.Model.RentRestUser", "User")
                         .WithMany()
