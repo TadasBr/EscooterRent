@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EscooterRentAPI.Migrations
 {
     [DbContext(typeof(ElectricScooterDbContext))]
-    [Migration("20221215182207_auth")]
-    partial class auth
+    [Migration("20221215205334_removeAuth")]
+    partial class removeAuth
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -165,13 +165,7 @@ namespace EscooterRentAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("RentPoints");
                 });
@@ -307,17 +301,6 @@ namespace EscooterRentAPI.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("EscooterRentAPI.Models.Entities.RentPoint", b =>
-                {
-                    b.HasOne("EscooterRentAPI.Auth.Model.RentRestUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

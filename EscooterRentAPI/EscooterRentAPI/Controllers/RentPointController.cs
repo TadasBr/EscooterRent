@@ -15,12 +15,10 @@ namespace EscooterRentAPI.Controllers
     public class RentPointController : ControllerBase
     {
         private readonly ElectricScooterDbContext _context;
-        private readonly IAuthorizationService _authorizationService;
 
-        public RentPointController(ElectricScooterDbContext context, IAuthorizationService service)
+        public RentPointController(ElectricScooterDbContext context)
         {
             _context = context;
-            _authorizationService = service;
         }
 
         [HttpGet]
@@ -31,7 +29,7 @@ namespace EscooterRentAPI.Controllers
         public async Task<IEnumerable<RentPoint>> GetRentPoints(int count) =>
             await _context.RentPoints.Take(count).ToListAsync();
 
-        [HttpGet, Route("RentPointsById/{rentId}")]
+        [HttpGet, Route("RentPointsById/{rentPointId}")]
         [ProducesResponseType(typeof(RentPoint), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetRentPointById(int rentPointId)
@@ -41,35 +39,36 @@ namespace EscooterRentAPI.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = RentRoles.RentUser)]
-        public async Task<ActionResult<RentPointDto>> CreateRentPoint(RentPoint rentPoint)
+        //[Authorize(Roles = RentRoles.RentUser)]
+        public async Task<ActionResult<RentPointDto>> Create(RentPoint rentPoint)
         {
-            var newRentPoint = new RentPoint
-            {
-                Address = rentPoint.Address,
-                City = rentPoint.City,
-                UserId = User.FindFirstValue(JwtRegisteredClaimNames.Sub)
-            };
+            Console.WriteLine("ok");
+            //var newRentPoint = new RentPoint
+            //{
+            //    Address = rentPoint.Address,
+            //    City = rentPoint.City
+            //    UserId = 
+            //};
 
-            await _context.RentPoints.AddAsync(newRentPoint);
+            await _context.RentPoints.AddAsync(rentPoint);
             await _context.SaveChangesAsync();
 
-            return Created("", new RentPointDto(newRentPoint.Address, newRentPoint.City));
+            return Created("", new RentPointDto(rentPoint.Address, rentPoint.City));
         }
 
         [HttpPut("{rentPointId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [Authorize(Roles = RentRoles.RentUser)]
+        //[Authorize(Roles = RentRoles.RentUser)]
         public async Task<IActionResult> UpdateRentPoint(int rentPointId, RentPoint rentPoint)
         {
             if (rentPointId != rentPoint.Id) return BadRequest();
 
-            var authorisationResult = await _authorizationService.AuthorizeAsync(User, rentPoint, PolicyNames.ResourceOwner);
-            if (!authorisationResult.Succeeded)
-            {
-                return Forbid();
-            }
+            //var authorisationResult = await _authorizationService.AuthorizeAsync(User, rentPoint, PolicyNames.ResourceOwner);
+            //if (!authorisationResult.Succeeded)
+            //{
+            //    return Forbid();
+            //}
 
             _context.Entry(rentPoint).State = EntityState.Modified;
             await _context.SaveChangesAsync();

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "0918R1lMFGALsZsPdCc+MhYigpnL3bjuaG9PcdWOdeleJK6aV7cab1aC+SKzF/AI7c4Gv77EnqDKT2Xle0ReDw==",
+  "dgSpecHash": "4YtLgesXWoXlNeOLqMsaelsavwtf+Hqx1UF4hiMrU7vpab1wU2BtiUk3/t9yzPWtKsqTDsP/f8jmygBcQiH5Ew==",
   "success": true,
   "projectFilePath": "C:\\Users\\Tadas\\Desktop\\Saitynai2022\\EscooterRent\\EscooterRentAPI\\EscooterRentAPI\\EscooterRentAPI.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,7 @@
     "C:\\Users\\Tadas\\.nuget\\packages\\microsoft.aspnetcore.authentication.cookies\\2.2.0\\microsoft.aspnetcore.authentication.cookies.2.2.0.nupkg.sha512",
     "C:\\Users\\Tadas\\.nuget\\packages\\microsoft.aspnetcore.authentication.core\\2.2.0\\microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",
     "C:\\Users\\Tadas\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.10\\microsoft.aspnetcore.authentication.jwtbearer.6.0.10.nupkg.sha512",
+    "C:\\Users\\Tadas\\.nuget\\packages\\microsoft.aspnetcore.cors\\2.2.0\\microsoft.aspnetcore.cors.2.2.0.nupkg.sha512",
     "C:\\Users\\Tadas\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.10\\microsoft.aspnetcore.cryptography.internal.6.0.10.nupkg.sha512",
     "C:\\Users\\Tadas\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\6.0.10\\microsoft.aspnetcore.cryptography.keyderivation.6.0.10.nupkg.sha512",
     "C:\\Users\\Tadas\\.nuget\\packages\\microsoft.aspnetcore.dataprotection\\2.2.0\\microsoft.aspnetcore.dataprotection.2.2.0.nupkg.sha512",

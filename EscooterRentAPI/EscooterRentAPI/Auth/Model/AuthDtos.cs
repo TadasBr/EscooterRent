@@ -9,5 +9,5 @@ namespace EscooterRentAPI.Auth.Model
 
     public record UserDto(string Id, string UserName, string Email);
 
-    public record SuccessfulLogInDto(string accessToken);
+    public record SuccessfulLogInDto(string accessToken, RentRestUser user, bool isAdmin);
 }
