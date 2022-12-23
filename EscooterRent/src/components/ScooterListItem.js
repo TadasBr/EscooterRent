@@ -16,7 +16,7 @@ import Spinner from "./Spinner";
         "rentPointId": 1
 * */
 
-const ScooterListItem = ({ brand, model, maxDistance, pricePerDay, maxSeed, scooterId, rentPointId }) => {
+const ScooterListItem = ({ brand, model, maxDistance, pricePerDay, maxSpeed, scooterId, rentPointId }) => {
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -51,6 +51,7 @@ const ScooterListItem = ({ brand, model, maxDistance, pricePerDay, maxSeed, scoo
                             <Typography component="h1" variant="h6">{model}</Typography>
                             <Typography component="h1" variant="h6">{maxDistance}</Typography>
                             <Typography component="h1" variant="h6">{pricePerDay}</Typography>
+                            <Typography component="h1" variant="h6">{maxSpeed}</Typography>
                         </Button>
                     </Link>
                 </Grid>
@@ -64,7 +65,9 @@ const ScooterListItem = ({ brand, model, maxDistance, pricePerDay, maxSeed, scoo
                                 <Delete />
                                 Delete
                             </Button>
-                            <Button>
+                            <Button
+                                onClick={() => window.location.href = `/rent-points/${rentPointId}/scooters/${scooterId}/edit`}
+                                >
                                 <Edit />
                                 Edit
                             </Button>

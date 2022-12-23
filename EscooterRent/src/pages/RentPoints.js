@@ -4,7 +4,7 @@ import { Link, Route, Switch, useRouteMatch } from "react-router-dom"
 import { Api, authConfig } from "../components/Api";
 import RentPointList from "../components/RentPointList";
 import AddScooter from "./AddScooter";
-import EditPost from "./EditPost";
+import EditScooter from "./EditScooter";
 import EditRentPoint from "./EditRentPoint";
 import Scooter from "./Scooter";
 import RentPoint from "./RentPoint";
@@ -35,7 +35,7 @@ const RentPoints = () => {
                     <Scooter />
                 </Route>
                 <Route exact path={`${match.path}/:rentPointId/scooters/:scooterId/edit`}>
-                    <EditPost />
+                    <EditScooter />
                 </Route>
             </Switch>
         </>

@@ -14,7 +14,7 @@ const ScootersList = ({ rentPointAddress, rentPointId, showOnlyPending }) => {
     useEffect(() => {
         const getscooters = async () => {
             setIsLoading(true);
-            const url = showOnlyPending ? `/RentPoints/pending` : `/ElectricScooter/ScootersByRentId/${rentPointId}`;
+            const url = `/ElectricScooter/ScootersByRentId/${rentPointId}`;
             const response = await Api.get(url, authConfig);
             setScooters(response.data);
             setIsLoading(false);

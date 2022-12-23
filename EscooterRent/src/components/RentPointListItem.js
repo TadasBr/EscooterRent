@@ -31,7 +31,7 @@ const RentPointListItem = ({ address, city, id}) => {
                 <Grid xs={12} md={8} item>
                     <Link to={`/rent-points/${id}`} style={{ textDecoration: "none" }}>
                         <Button>
-                            <Typography component="h1" variant="h6">{address}</Typography>
+                            <Typography component="h1" variant="h6">{address}  </Typography>
                             <Typography component="h1" variant="h6">{city}</Typography>
                         </Button>
                     </Link>
