@@ -1,4 +1,5 @@
-# EscooterRent1	Sprendžiamo uždavinio aprašymas
+# EscooterRent
+
 ###Sistemos paskirtis
 Projekto tikslas – palengvinti elektrinių paspirtukų nuomininko darbą.
 
@@ -7,16 +8,17 @@ Veikimo principas – platformą sudaro dvi dalys: internetinė aplikaciją, kur
 Nuomininkas, norėdamas naudotis šia platforma pirmiausiai turės prisiregistruoti prie internetinės aplikacijos, toliau galės pridėti paspirtukus, informaciją apie juos kaip dydis, greitis, kaina ar išnuomotas bei galės pridėti informaciją apie nuomininkus kaip lytis, telefonas, kokį paspirtuką šiuo metu išsinuomavęs ir pan.
 
 ###Funkciniai reikalavimai
-Neregistruotas sistemos naudotojas galės: 
+
+#Neregistruotas sistemos naudotojas galės: 
 -Prisiregistruoti prie internetinės platformos;
-Registruotas sistemos naudotojas galės:
+#Registruotas sistemos naudotojas galės:
 -Atsijungti nuo internetinės platformos;
 -Prisijungti prie internetinės platformos;
 -Peržiūrėti laisvus paspirtukus;
 -Peržiūrėti visus paspirtukus;
 -Peržiūrėti nuomos punktus;
 -Išsinuomoti paspirtuką norimam laikui;
-Administratorius galės:
+#Administratorius galės:
 -Pridėti paspirtuką:
 -Pridėti markę;
 -Pridėti nuvažiuojamą maksimalų atstumą;
