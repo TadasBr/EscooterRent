@@ -41,6 +41,9 @@ Nuomininkas, norėdamas naudotis šia platforma pirmiausiai turės prisiregistru
 - Kliento pusė (ang. Front-end) – naudojantis React.js;
 - Serverio pusė (ang. Back-end) – naudojantis .NET core. Duomenų bazė – MySQL.
 
+### Vartotojo sąsaja
+
+
 ## API specifikacija 
 
 ### GET RentPoint
