@@ -41,7 +41,48 @@ Nuomininkas, norėdamas naudotis šia platforma pirmiausiai turės prisiregistru
 - Kliento pusė (ang. Front-end) – naudojantis React.js;
 - Serverio pusė (ang. Back-end) – naudojantis .NET core. Duomenų bazė – MySQL.
 
-### Vartotojo sąsaja
+## Vartotojo sąsaja
+
+### Login
+
+![alt text](https://github.com/TadasBr/EscooterRent/blob/main/images/Login.png)
+
+### Register
+
+![alt text](https://github.com/TadasBr/EscooterRent/blob/main/images/Register.png)
+
+### Home page
+
+![alt text](https://github.com/TadasBr/EscooterRent/blob/main/images/HomePage.png)
+
+### Rent points
+
+![alt text](https://github.com/TadasBr/EscooterRent/blob/main/images/RentPointsList.png)
+
+### Add rent point
+
+![alt text](https://github.com/TadasBr/EscooterRent/blob/main/images/AddRentPoint.png)
+
+### Edit rent point
+
+![alt text](https://github.com/TadasBr/EscooterRent/blob/main/images/EditRentPoint.png)
+
+### Scooters
+
+![alt text](https://github.com/TadasBr/EscooterRent/blob/main/images/Scooters.png)
+
+### Edit scooter
+
+![alt text](https://github.com/TadasBr/EscooterRent/blob/main/images/editSCooter.png)
+
+### Phone
+
+![alt text](https://github.com/TadasBr/EscooterRent/blob/main/images/phone.png)
+
+
+### Phone hamburger
+
+![alt text](https://github.com/TadasBr/EscooterRent/blob/main/images/phone2.png)
 
 
 ## API specifikacija 
