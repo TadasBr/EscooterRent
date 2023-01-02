@@ -570,3 +570,7 @@ Body:
     }
 }
 ```
+
+## Išvados
+
+Projekto metu buvo sukurta paspirtukų nuomos punktų sistema. Buvo išmoktos ir pagilintos .Net bei React.js žinios, susipažinta su REST API kūrimu. Susipažinta su autorizacija ir autentifikacija bei jų naudojimu.
